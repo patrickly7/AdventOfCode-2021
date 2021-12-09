@@ -50,6 +50,34 @@ func getNumberOfIntersectingPoints(hydroThermalVents [][2]int, size int) int {
 			} else {
 				oceanFloor[x][firstCoord[1]] += 1
 			}
+		} else { // diagonal lines
+			var leftCoord [2]int
+			var rightCoord [2]int
+
+			if firstCoord[0] < secondCoord[0] {
+				leftCoord = firstCoord
+				rightCoord = secondCoord
+			} else {
+				leftCoord = secondCoord
+				rightCoord = firstCoord
+			}
+
+			x := leftCoord[0]
+			if leftCoord[1] < rightCoord[1] {
+				y := leftCoord[1]
+				for x <= rightCoord[0] {
+					oceanFloor[x][y] += 1
+					x++
+					y++
+				}
+			} else {
+				y := leftCoord[1]
+				for x <= rightCoord[0] {
+					oceanFloor[x][y] += 1
+					x++
+					y--
+				}
+			}
 		}
 	}
 
@@ -88,34 +116,32 @@ func main() {
 		firstCoord := strings.Split(splitLine[0], ",")
 		secondCoord := strings.Split(splitLine[2], ",")
 
-		// x1 = x2 or y1 = y2 (Horizontal Lines)
-		if firstCoord[0] == secondCoord[0] || firstCoord[1] == secondCoord[1] {
-			firstCoordX, _ := strconv.Atoi(firstCoord[0])
-			if firstCoordX > largestCoordinate {
-				largestCoordinate = firstCoordX
-			}
-
-			firstCoordY, _ := strconv.Atoi(firstCoord[1])
-			if firstCoordY > largestCoordinate {
-				largestCoordinate = firstCoordY
-			}
-
-			coord1 := [2]int{firstCoordX, firstCoordY}
-			hydroThermalVents = append(hydroThermalVents, coord1)
-
-			secondCoordX, _ := strconv.Atoi(secondCoord[0])
-			if secondCoordX > largestCoordinate {
-				largestCoordinate = secondCoordX
-			}
-
-			secondCoordY, _ := strconv.Atoi(secondCoord[1])
-			if secondCoordY > largestCoordinate {
-				largestCoordinate = secondCoordY
-			}
-
-			coord2 := [2]int{secondCoordX, secondCoordY}
-			hydroThermalVents = append(hydroThermalVents, coord2)
+		// Get All Lines
+		firstCoordX, _ := strconv.Atoi(firstCoord[0])
+		if firstCoordX > largestCoordinate {
+			largestCoordinate = firstCoordX
 		}
+
+		firstCoordY, _ := strconv.Atoi(firstCoord[1])
+		if firstCoordY > largestCoordinate {
+			largestCoordinate = firstCoordY
+		}
+
+		coord1 := [2]int{firstCoordX, firstCoordY}
+		hydroThermalVents = append(hydroThermalVents, coord1)
+
+		secondCoordX, _ := strconv.Atoi(secondCoord[0])
+		if secondCoordX > largestCoordinate {
+			largestCoordinate = secondCoordX
+		}
+
+		secondCoordY, _ := strconv.Atoi(secondCoord[1])
+		if secondCoordY > largestCoordinate {
+			largestCoordinate = secondCoordY
+		}
+
+		coord2 := [2]int{secondCoordX, secondCoordY}
+		hydroThermalVents = append(hydroThermalVents, coord2)
 	}
 
 	fmt.Printf("The number of intersected points is: %d\n", getNumberOfIntersectingPoints(hydroThermalVents, largestCoordinate+1))
