@@ -136,10 +136,6 @@ func main() {
 		xLow, _ := strconv.Atoi(xBoundList[0])
 		xHigh, _ := strconv.Atoi(xBoundList[1])
 
-		if (xLow < -50 && xHigh < -50) || (xLow > 50 && xHigh > 50) {
-			continue
-		}
-
 		newCuboid.fromXYZ = append(newCuboid.fromXYZ, xLow)
 		newCuboid.toXYZ = append(newCuboid.toXYZ, xHigh)
 
@@ -150,10 +146,6 @@ func main() {
 		yLow, _ := strconv.Atoi(yBoundList[0])
 		yHigh, _ := strconv.Atoi(yBoundList[1])
 
-		if (yLow < -50 && yHigh < -50) || (yLow > 50 && yHigh > 50) {
-			continue
-		}
-
 		newCuboid.fromXYZ = append(newCuboid.fromXYZ, yLow)
 		newCuboid.toXYZ = append(newCuboid.toXYZ, yHigh)
 
@@ -163,10 +155,6 @@ func main() {
 
 		zLow, _ := strconv.Atoi(zBoundList[0])
 		zHigh, _ := strconv.Atoi(zBoundList[1])
-
-		if (zLow < -50 && zHigh < -50) || (zLow > 50 && zHigh > 50) {
-			continue
-		}
 
 		newCuboid.fromXYZ = append(newCuboid.fromXYZ, zLow)
 		newCuboid.toXYZ = append(newCuboid.toXYZ, zHigh)
